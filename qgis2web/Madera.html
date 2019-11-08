@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 974px;
+            height: 821px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/SoilAgriculturalBankingIndexSAGBI_1.js"></script>
+        <script src="data/DACPlaces_2.js"></script>
+        <script src="data/DryWells_3.js"></script>
+        <script src="data/MaderaSubbasinBoundary_4.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[36.60383057497698,-120.4446072596299],[37.25778650403872,-119.66848373942476]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_OpenStreetMap_0 = L.tileLayer('http://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 19
+        });
+        layer_OpenStreetMap_0;
+        map.addLayer(layer_OpenStreetMap_0);
+        function pop_SoilAgriculturalBankingIndexSAGBI_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID_not_cu'] !== null ? Autolinker.link(String(feature.properties['FID_not_cu'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['areasymbol'] !== null ? Autolinker.link(String(feature.properties['areasymbol'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['spatialver'] !== null ? Autolinker.link(String(feature.properties['spatialver'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['musym'] !== null ? Autolinker.link(String(feature.properties['musym'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey'] !== null ? Autolinker.link(String(feature.properties['mukey'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey_num'] !== null ? Autolinker.link(String(feature.properties['mukey_num'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['acres'] !== null ? Autolinker.link(String(feature.properties['acres'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey_1'] !== null ? Autolinker.link(String(feature.properties['mukey_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cokey'] !== null ? Autolinker.link(String(feature.properties['cokey'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['deep_perc'] !== null ? Autolinker.link(String(feature.properties['deep_perc'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['rt_zn_res_'] !== null ? Autolinker.link(String(feature.properties['rt_zn_res_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['toxicity'] !== null ? Autolinker.link(String(feature.properties['toxicity'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['topo_rest'] !== null ? Autolinker.link(String(feature.properties['topo_rest'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['surf_cond'] !== null ? Autolinker.link(String(feature.properties['surf_cond'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['restrictns'] !== null ? Autolinker.link(String(feature.properties['restrictns'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sagbi'] !== null ? Autolinker.link(String(feature.properties['sagbi'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['rat_grp'] !== null ? Autolinker.link(String(feature.properties['rat_grp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['slope_l'] !== null ? Autolinker.link(String(feature.properties['slope_l'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['slope_h'] !== null ? Autolinker.link(String(feature.properties['slope_h'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['compname'] !== null ? Autolinker.link(String(feature.properties['compname'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['taxsubgrp'] !== null ? Autolinker.link(String(feature.properties['taxsubgrp'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['noag_sagbi'] !== null ? Autolinker.link(String(feature.properties['noag_sagbi'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FID_cultiv'] !== null ? Autolinker.link(String(feature.properties['FID_cultiv'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['areasymb_1'] !== null ? Autolinker.link(String(feature.properties['areasymb_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['spatialv_1'] !== null ? Autolinker.link(String(feature.properties['spatialv_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['musym_1'] !== null ? Autolinker.link(String(feature.properties['musym_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey_12'] !== null ? Autolinker.link(String(feature.properties['mukey_12'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey_nu_1'] !== null ? Autolinker.link(String(feature.properties['mukey_nu_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['acres_1'] !== null ? Autolinker.link(String(feature.properties['acres_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['mukey_1_13'] !== null ? Autolinker.link(String(feature.properties['mukey_1_13'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['cokey_1'] !== null ? Autolinker.link(String(feature.properties['cokey_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['deep_per_1'] !== null ? Autolinker.link(String(feature.properties['deep_per_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['rt_zn_res1'] !== null ? Autolinker.link(String(feature.properties['rt_zn_res1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['toxicity_1'] !== null ? Autolinker.link(String(feature.properties['toxicity_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['topo_res_1'] !== null ? Autolinker.link(String(feature.properties['topo_res_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['surf_con_1'] !== null ? Autolinker.link(String(feature.properties['surf_con_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['restrict_1'] !== null ? Autolinker.link(String(feature.properties['restrict_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sagbi_1'] !== null ? Autolinker.link(String(feature.properties['sagbi_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['rat_grp_1'] !== null ? Autolinker.link(String(feature.properties['rat_grp_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['slope_l_1'] !== null ? Autolinker.link(String(feature.properties['slope_l_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['slope_h_1'] !== null ? Autolinker.link(String(feature.properties['slope_h_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['compname_1'] !== null ? Autolinker.link(String(feature.properties['compname_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['taxsubgr_1'] !== null ? Autolinker.link(String(feature.properties['taxsubgr_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['sagbi_comb'] !== null ? Autolinker.link(String(feature.properties['sagbi_comb'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SoilAgriculturalBankingIndexSAGBI_1_0(feature) {
+            if (feature.properties['sagbi_comb'] >= 0.000000 && feature.properties['sagbi_comb'] <= 14.700000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(215,25,28,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['sagbi_comb'] >= 14.700000 && feature.properties['sagbi_comb'] <= 29.040000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,144,83,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['sagbi_comb'] >= 29.040000 && feature.properties['sagbi_comb'] <= 49.220000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,223,154,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['sagbi_comb'] >= 49.220000 && feature.properties['sagbi_comb'] <= 68.970000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,240,158,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['sagbi_comb'] >= 68.970000 && feature.properties['sagbi_comb'] <= 85.050000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(138,204,98,1.0)',
+                interactive: true,
+            }
+            }
+            if (feature.properties['sagbi_comb'] >= 85.050000 && feature.properties['sagbi_comb'] <= 100.000000 ) {
+                return {
+                pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,150,65,1.0)',
+                interactive: true,
+            }
+            }
+        }
+        map.createPane('pane_SoilAgriculturalBankingIndexSAGBI_1');
+        map.getPane('pane_SoilAgriculturalBankingIndexSAGBI_1').style.zIndex = 401;
+        map.getPane('pane_SoilAgriculturalBankingIndexSAGBI_1').style['mix-blend-mode'] = 'normal';
+        var layer_SoilAgriculturalBankingIndexSAGBI_1 = new L.geoJson(json_SoilAgriculturalBankingIndexSAGBI_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_SoilAgriculturalBankingIndexSAGBI_1',
+            layerName: 'layer_SoilAgriculturalBankingIndexSAGBI_1',
+            pane: 'pane_SoilAgriculturalBankingIndexSAGBI_1',
+            onEachFeature: pop_SoilAgriculturalBankingIndexSAGBI_1,
+            style: style_SoilAgriculturalBankingIndexSAGBI_1_0,
+        });
+        bounds_group.addLayer(layer_SoilAgriculturalBankingIndexSAGBI_1);
+        map.addLayer(layer_SoilAgriculturalBankingIndexSAGBI_1);
+        function pop_DACPlaces_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['STATEFP'] !== null ? Autolinker.link(String(feature.properties['STATEFP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLACEFP'] !== null ? Autolinker.link(String(feature.properties['PLACEFP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PLACENS'] !== null ? Autolinker.link(String(feature.properties['PLACENS'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GEOID'] !== null ? Autolinker.link(String(feature.properties['GEOID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAME'] !== null ? Autolinker.link(String(feature.properties['NAME'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['NAMELSAD'] !== null ? Autolinker.link(String(feature.properties['NAMELSAD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['LSAD'] !== null ? Autolinker.link(String(feature.properties['LSAD'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CLASSFP'] !== null ? Autolinker.link(String(feature.properties['CLASSFP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCICBSA'] !== null ? Autolinker.link(String(feature.properties['PCICBSA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['PCINECTA'] !== null ? Autolinker.link(String(feature.properties['PCINECTA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MTFCC'] !== null ? Autolinker.link(String(feature.properties['MTFCC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['FUNCSTAT'] !== null ? Autolinker.link(String(feature.properties['FUNCSTAT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ALAND'] !== null ? Autolinker.link(String(feature.properties['ALAND'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['AWATER'] !== null ? Autolinker.link(String(feature.properties['AWATER'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTPTLAT'] !== null ? Autolinker.link(String(feature.properties['INTPTLAT'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['INTPTLON'] !== null ? Autolinker.link(String(feature.properties['INTPTLON'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OID_1'] !== null ? Autolinker.link(String(feature.properties['OID_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GEOID_1'] !== null ? Autolinker.link(String(feature.properties['GEOID_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Place'] !== null ? Autolinker.link(String(feature.properties['Place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Pop16'] !== null ? Autolinker.link(String(feature.properties['Pop16'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['HH16'] !== null ? Autolinker.link(String(feature.properties['HH16'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['MHI16'] !== null ? Autolinker.link(String(feature.properties['MHI16'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['DAC16'] !== null ? Autolinker.link(String(feature.properties['DAC16'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DACPlaces_2_0(feature) {
+            switch(String(feature.properties['DAC16'])) {
+                case 'N':
+                    return {
+                pane: 'pane_DACPlaces_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,121,135,1.0)',
+                interactive: true,
+            }
+                    break;
+                case 'Y':
+                    return {
+                pane: 'pane_DACPlaces_2',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(76,204,206,1.0)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_DACPlaces_2');
+        map.getPane('pane_DACPlaces_2').style.zIndex = 402;
+        map.getPane('pane_DACPlaces_2').style['mix-blend-mode'] = 'normal';
+        var layer_DACPlaces_2 = new L.geoJson(json_DACPlaces_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DACPlaces_2',
+            layerName: 'layer_DACPlaces_2',
+            pane: 'pane_DACPlaces_2',
+            onEachFeature: pop_DACPlaces_2,
+            style: style_DACPlaces_2_0,
+        });
+        bounds_group.addLayer(layer_DACPlaces_2);
+        map.addLayer(layer_DACPlaces_2);
+        function pop_DryWells_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['ID'] !== null ? Autolinker.link(String(feature.properties['ID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Status'] !== null ? Autolinker.link(String(feature.properties['Status'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Primary_Us'] !== null ? Autolinker.link(String(feature.properties['Primary_Us'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Shortage_T'] !== null ? Autolinker.link(String(feature.properties['Shortage_T'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Water_Issu'] !== null ? Autolinker.link(String(feature.properties['Water_Issu'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Lat_Value'] !== null ? Autolinker.link(String(feature.properties['Lat_Value'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Long_Value'] !== null ? Autolinker.link(String(feature.properties['Long_Value'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Well_Depth'] !== null ? Autolinker.link(String(feature.properties['Well_Depth'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Depth_QA_Q'] !== null ? Autolinker.link(String(feature.properties['Depth_QA_Q'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_DryWells_3_0() {
+            return {
+                pane: 'pane_DryWells_3',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_DryWells_3');
+        map.getPane('pane_DryWells_3').style.zIndex = 403;
+        map.getPane('pane_DryWells_3').style['mix-blend-mode'] = 'normal';
+        var layer_DryWells_3 = new L.geoJson(json_DryWells_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_DryWells_3',
+            layerName: 'layer_DryWells_3',
+            pane: 'pane_DryWells_3',
+            onEachFeature: pop_DryWells_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_DryWells_3_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_DryWells_3);
+        map.addLayer(layer_DryWells_3);
+        function pop_MaderaSubbasinBoundary_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['OBJECTID'] !== null ? Autolinker.link(String(feature.properties['OBJECTID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Basin_Numb'] !== null ? Autolinker.link(String(feature.properties['Basin_Numb'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Basin_Subb'] !== null ? Autolinker.link(String(feature.properties['Basin_Subb'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Basin_Name'] !== null ? Autolinker.link(String(feature.properties['Basin_Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Basin_Su_1'] !== null ? Autolinker.link(String(feature.properties['Basin_Su_1'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Region_Off'] !== null ? Autolinker.link(String(feature.properties['Region_Off'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['GlobalID'] !== null ? Autolinker.link(String(feature.properties['GlobalID'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['CC_overdra'] !== null ? Autolinker.link(String(feature.properties['CC_overdra'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_MaderaSubbasinBoundary_4_0() {
+            return {
+                pane: 'pane_MaderaSubbasinBoundary_4',
+                opacity: 1,
+                color: 'rgba(228,26,28,1.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 4.0,
+                fillOpacity: 0,
+                interactive: true,
+            }
+        }
+        map.createPane('pane_MaderaSubbasinBoundary_4');
+        map.getPane('pane_MaderaSubbasinBoundary_4').style.zIndex = 404;
+        map.getPane('pane_MaderaSubbasinBoundary_4').style['mix-blend-mode'] = 'normal';
+        var layer_MaderaSubbasinBoundary_4 = new L.geoJson(json_MaderaSubbasinBoundary_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_MaderaSubbasinBoundary_4',
+            layerName: 'layer_MaderaSubbasinBoundary_4',
+            pane: 'pane_MaderaSubbasinBoundary_4',
+            onEachFeature: pop_MaderaSubbasinBoundary_4,
+            style: style_MaderaSubbasinBoundary_4_0,
+        });
+        bounds_group.addLayer(layer_MaderaSubbasinBoundary_4);
+        map.addLayer(layer_MaderaSubbasinBoundary_4);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/MaderaSubbasinBoundary_4.png" /> Madera Sub-basin Boundary': layer_MaderaSubbasinBoundary_4,'<img src="legend/DryWells_3.png" /> Dry Wells': layer_DryWells_3,'DAC Places<br /><table><tr><td style="text-align: center;"><img src="legend/DACPlaces_2_NotaDAC0.png" /></td><td>Not a DAC</td></tr><tr><td style="text-align: center;"><img src="legend/DACPlaces_2_DAC1.png" /></td><td>DAC</td></tr></table>': layer_DACPlaces_2,'Soil Agricultural Banking Index (SAGBI)<br /><table><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_Poor0.png" /></td><td>Poor</td></tr><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_ModeratleyPoor1.png" /></td><td>Moderatley Poor</td></tr><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_Moderate2.png" /></td><td>Moderate</td></tr><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_ModeratelyGood3.png" /></td><td>Moderately Good</td></tr><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_Good4.png" /></td><td>Good</td></tr><tr><td style="text-align: center;"><img src="legend/SoilAgriculturalBankingIndexSAGBI_1_Excellent5.png" /></td><td>Excellent</td></tr></table>': layer_SoilAgriculturalBankingIndexSAGBI_1,"OpenStreetMap": layer_OpenStreetMap_0,},{collapsed:false}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
